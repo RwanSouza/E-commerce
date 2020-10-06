@@ -26,8 +26,7 @@ module.exports = {
       data.price,
       data.quantity,
       data.status,
-    ] 
-
+    ]
 
     return db.query(query, values); 
   },
