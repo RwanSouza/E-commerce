@@ -11,6 +11,9 @@ routes.get('/products/create', productController.create);
 routes.get('/products/:id/edit', productController.edit);
 
 routes.post('/products', productController.post);
+routes.put('/products', productController.put);
+routes.delete('/products', productController.delete);
+
 
 
 routes.get('/', (req, res ) => {

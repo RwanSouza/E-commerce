@@ -51,7 +51,7 @@
         </div>
   </div>
 
-  {% if product.status %}
+  {% if (product.status == 0) or (product.status == 1 ) %}
   <div class="item">
     <div> Available ? </div>
       <div id="direction-box"> 
@@ -63,7 +63,7 @@
           value="1" 
           {% if product.status == '1' %}
           checked
-          {% endif %}} /> <p>Yes</p>
+          {% endif %}} /> Yes
         </span>
 
         <span class="choice-box">
@@ -71,9 +71,9 @@
           type="radio" 
           name="status" 
           value="0" 
-          {% if product.gender == '0' %}
+          {% if product.status == '0' %}
           checked
-          {% endif %}} /> <p>No</p>
+          {% endif %}} /> No
         </span>
         
       </div>

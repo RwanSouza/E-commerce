@@ -246,5 +246,9 @@
   .item #direction-box  span {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+  }
+
+  .choice-box input {
+    margin-right: 15px;
   }
