@@ -26,9 +26,7 @@
   <div class="item">
     <div> Description </div>
       <div> 
-        <textarea  name="description">
-          {{product.description}}
-        </textarea>
+        <textarea  name="description">{{product.description}}</textarea>
       </div>
   </div>
 
@@ -65,7 +63,7 @@
           value="1" 
           {% if product.status == '1' %}
           checked
-          {% endif %}} />Yes
+          {% endif %}} /> <p>Yes</p>
         </span>
 
         <span class="choice-box">
@@ -75,7 +73,7 @@
           value="0" 
           {% if product.gender == '0' %}
           checked
-          {% endif %}} />No
+          {% endif %}} /> <p>No</p>
         </span>
         
       </div>

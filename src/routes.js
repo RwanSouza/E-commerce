@@ -8,6 +8,8 @@ routes.get('/', (req, res ) => {
 });
 
 routes.get('/products/create', productController.create);
+routes.get('/products/:id/edit', productController.edit);
+
 routes.post('/products', productController.post);
 
 

@@ -2,7 +2,7 @@
 
   :root {
     --primary-color:#fd951f;
-    --secundary-color:#1fd4fd;
+    --secundary-color:#1f84fd;
   }
 
   * {
@@ -56,6 +56,22 @@
   .button:hover {
     background-color: #d7780b;
     color: whitesmoke;
+  }
+
+  .button.edit {
+    background-color: var(--secundary-color);
+  }
+
+  .button.delete {
+    background-color: lightgrey;
+  }
+
+  .button.edit:hover {
+    background-color:rgb(5, 109, 133)
+  }
+
+  .button.delete:hover {
+    background-color: rgb(204, 72, 72);
   }
 
   /* Header */
@@ -184,6 +200,10 @@
     font-size: 16px;
   }
 
+  form .fields {
+    margin-bottom: 64px;
+  }
+
   form .item select {
     /* force styling in select */
     -moz-appearance: none;
@@ -204,6 +224,27 @@
     resize: vertical;
   }
 
-  form .fields {
-    margin-bottom: 64px;
+  form .item span {
+    padding: 8px 16px;
+    border-radius: 16px;
+    color:white;
+    margin-right: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #1f84fd;
+  }
+
+  .item #direction-box {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    align-items: center;
+    grid-gap: 10px
+  }
+
+  .item #direction-box  span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
