@@ -66,7 +66,7 @@
 
        const totalPhotos = fileList.length + photosDiv.length;
        if(totalPhotos > uploadLimit) {
-         alert("You have reached the maximum photo limit");
+         alert("You have reached the max photo limit");
          event.preventDefault()
          return true;
        }
