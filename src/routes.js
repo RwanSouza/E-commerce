@@ -2,6 +2,7 @@ const express = require('express');
 const routes = express.Router();
 const multer = require('./app/middlewares/multer');
 const productController = require('./app/Controllers/ProductController');
+const ProductController = require('./app/Controllers/ProductController');
 
 
 routes.get('/', (req, res ) => {
@@ -9,6 +10,7 @@ routes.get('/', (req, res ) => {
 });
 
 routes.get('/products/create', productController.create);
+routes.get('/products/:id', ProductController.show)
 routes.get('/products/:id/edit', productController.edit);
 
 routes.post('/products', multer.array("photos", 6), productController.post);
