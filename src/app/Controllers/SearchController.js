@@ -5,28 +5,44 @@ const File = require('../models/File');
 
 module.exports = {
   async index(req, res) {
-    let results = await Product.all()
-    const products = results.rows
+    try { 
 
-    if(!products) return res.send('Products not found!')
+      let results, params  = {}
+      
+      const {filter, category } = req.query
 
-    async function getImage(productId) {
-      let results = await Product.files(productId)
-      const files = results.rows.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
+      if(!filter) return res.redirect('/')
 
-      return files[0]
+      params.filter = filter
+
+      if(category) {
+        params.category = category
+      }
+
+      results = await Product.search(params)
+
+      async function getImage(productId) {
+        let results = await Product.files(productId)
+        const files = results.rows.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
+  
+        return files[0]
+      }
+
+      const  prouctsPromise = results.rows.map(async product => {
+        product.img = await getImage(product.id)
+        product.oldPrice = formatPrice(product.old_price)
+        product.price = formatPrice(product.price)
+  
+        return  product
+      })
+
+      const products = await Promise.all(prouctsPromise)
+
+      return res.render('search/index', { products })
+
     }
-
-    const productsPromise = products.map(async product => {
-      product.img = await getImage(product.id)
-      product.oldPrice = formatPrice(product.old_price)
-      product.price = formatPrice(product.price)
-
-      return  product
-    }).filter((product, index) => index > 2 ? false : true)
-
-    const lastAdded = await Promise.all(productsPromise)
-
-    return res.render("search/index", { products: lastAdded })
+    catch(err) {
+      console.error(err)
+    }
   }
 }
