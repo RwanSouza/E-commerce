@@ -17,7 +17,7 @@ const userController = require('../app/Controllers/UserController');
 // routes.post('/password-reset', sessionController.reset);
 
 // // user register UserController 
-// routes.get('/register', userController.registerForm);
+routes.get('/register', userController.registerForm);
 // routes.post('/register', userController.post);
 
 // routes.get('/', userController.show);

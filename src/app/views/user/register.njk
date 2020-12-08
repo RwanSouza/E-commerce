@@ -2,16 +2,16 @@
 
   {% block content %}
 
-  <section class="container form">
+  <section class="user-register container form">
 
-    <form  method="POST" action="/products" enctype="multipart/form-data"> 
+    <form  method="POST" action="/users/register" > 
 
         <div class="header">
-          <h3>Register products {{productId}}</h3>
+          <h3>Register</h3>
         </div>
         
         <div class="fields">
-          {% include "products/fields.njk"%}
+          {% include "user/fields.njk"%}
         </div>  
 
         <button class="button" type="submit">Save</button>  
