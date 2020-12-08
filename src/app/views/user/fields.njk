@@ -39,14 +39,16 @@
     <div class="item">
       <div> CPF or CNPJ </div>
         <div class="input">  
-          <input type="text" name="cpf_cnpj" placeholder="Type your cpf or cnpj" value="{{user.cpf_cnpj}}"/>
+          <input type="text" name="cpf_cnpj" placeholder="Type your cpf or cnpj" value="{{user.cpf_cnpj}}"
+           onkeydown="Mask.apply(this, 'cpfCnpj')"/>
         </div>
     </div>
    
    <div class="item">
       <div> Zip Code </div>
         <div class="input"> 
-          <input type="text" name="cep" placeholder="0920-077" value="{{user.cep}}"/>
+          <input type="text" name="cep" placeholder="09920-077" value="{{user.cep}}"
+          onkeydown="Mask.apply(this, 'cep')" />
         </div>
     </div>
    
