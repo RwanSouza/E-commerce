@@ -42,7 +42,9 @@
       <div> CPF or CNPJ </div>
         <div class="input">  
           <input type="text" name="cpf_cnpj" placeholder="Type your cpf or cnpj" value="{{user.cpf_cnpj}}"
-           onkeydown="Mask.apply(this, 'cpfCnpj')"/>
+           onkeydown="Mask.apply(this, 'cpfCnpj')"
+           onblur="Validate.apply(this, 'isCpfCpnj')"
+           />
         </div>
     </div>
    
@@ -50,7 +52,9 @@
       <div> Zip Code </div>
         <div class="input"> 
           <input type="text" name="cep" placeholder="09920-077" value="{{user.cep}}"
-          onkeydown="Mask.apply(this, 'cep')" />
+          onkeydown="Mask.apply(this, 'cep')" 
+          onblur="Validate.apply(this, 'isCep')"
+           /> 
         </div>
     </div>
    
