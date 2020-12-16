@@ -6,7 +6,10 @@ async function post(req, res, next) {
 
     for(key of keys ) {
       if(req.body[key] == "") {
-        return res.send('Please, fill all fields')
+        return res.render('user/register', {
+          user: req.body,
+          error: 'Please, fill all fields'
+        })
       }
     }
 
@@ -20,11 +23,17 @@ async function post(req, res, next) {
       or: {cpf_cnpj} 
     })
 
-    if(user) return res.send('Users exists')
+    if(user) return res.render('user/register', {
+      user: req.body,
+      error: 'Registered user'
+    })
 
     // check if password match
     if(password != passwordRepeat )
-      return res.send('Password not match')
+    return res.render('user/register', {
+      user: req.body,
+      error: 'Password not match'
+    })
 
     next()  
 }
