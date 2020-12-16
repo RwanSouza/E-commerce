@@ -22,7 +22,7 @@ const userController = require('../app/Controllers/UserController');
 routes.get('/register', userController.registerForm);
 routes.post('/register', validator.post, userController.post);
 
-// routes.get('/', userController.show);
+routes.get('/', userController.show);
 // routes.put('/', userController.update);
 // routes.delete('/', userController.delete);
 
