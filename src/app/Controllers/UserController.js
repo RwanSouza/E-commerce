@@ -1,3 +1,4 @@
+const { rawListeners } = require('../../config/db')
 const { create } = require('../models/User')
 const User = require('../models/User')
 
@@ -12,6 +13,8 @@ module.exports = {
   async post(req, res) {
   
     const userId = await User.create(req.body)
+
+    req.session.userId = userId
 
     return res.redirect('/users')
   }
