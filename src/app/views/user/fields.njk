@@ -21,13 +21,20 @@
     <div class="item">
       <div> Password </div>
         <div class="input"> 
-          <input type="password" name="password" placeholder="Type your password" value="{{user.password}}"/>
+          <input 
+          type="password" 
+          name="password" 
+          {%if not user.id %}
+          placeholder="Type your password"
+          {%else%}
+          placeholder="Type your password to edit your register"
+          {%endif%}
+           />
         </div>
     </div>
    
    
    {% if not user.id %}
-   
    
    <div class="item">
       <div> Password </div>
