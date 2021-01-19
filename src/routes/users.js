@@ -1,15 +1,17 @@
 const express = require('express');
 const routes = express.Router();
 
-const validator = require('../app/validators/user')
+const UserValidator = require('../app/validators/user');
+const SessionValidator = require('../app/validators/session');
+
 
 const sessionController = require('../app/Controllers/SessionController');
 const userController = require('../app/Controllers/UserController');
 
 
 // // login/logout
-// routes.get('/login', sessionController.loginForm);
-// routes.post('/login', sessionController.login);
+routes.get('/login', sessionController.loginForm);
+routes.post('/login', SessionValidator.login, sessionController.login);
 routes.post('/logout', sessionController.logout);
 
 // // reset password / forgot
@@ -20,10 +22,10 @@ routes.post('/logout', sessionController.logout);
 
 // // user register UserController 
 routes.get('/register', userController.registerForm);
-routes.post('/register', validator.post, userController.post);
+routes.post('/register', UserValidator.post, userController.post);
 
-routes.get('/', validator.show, userController.show);
-routes.put('/', validator.update ,userController.update);
+routes.get('/', UserValidator.show, userController.show);
+routes.put('/', UserValidator.update ,userController.update);
 // routes.delete('/', userController.delete);
 
 
