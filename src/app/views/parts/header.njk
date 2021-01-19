@@ -28,11 +28,33 @@
             </a>
           </li>
 
-          <li>
+          <li class="accounts">
             <a href="http:/accounts">
               <i class="material-icons">account_circle</i>
               My account
             </a>
+
+            {%if user%}
+            <ul class="submenu">
+              <li>
+                <a href="/users">Settings</a>
+              </li>
+
+              <li>
+                <a href="/buying">My requests </a>
+              </li>
+
+              <li>
+                <a href="/selling">My sales</a>
+              </li>
+
+              <li>
+                <form action="/users/logout" method="POST">
+                  <button>Sair</button>
+                </form>
+              </li>
+            </ul>
+            {%endif%}
           </li>
         </ul>
       </nav>

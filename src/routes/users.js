@@ -10,7 +10,7 @@ const userController = require('../app/Controllers/UserController');
 // // login/logout
 // routes.get('/login', sessionController.loginForm);
 // routes.post('/login', sessionController.login);
-// routes.post('/logout', sessionController.logout);
+routes.post('/logout', sessionController.logout);
 
 // // reset password / forgot
 // routes.get('/forgot-password', sessionController.forgotForm);
