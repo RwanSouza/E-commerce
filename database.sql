@@ -75,3 +75,8 @@ CREATE TABLE "session" (
 
 WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_key" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+
+-- token password recovery
+ALTER TABLE "users" ADD COLUMN reset_token text;
+ALTER TABLE "users" ADD COLUMN reset_token_expires text;
