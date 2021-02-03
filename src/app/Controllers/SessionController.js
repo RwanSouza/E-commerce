@@ -36,7 +36,7 @@ module.exports = {
     await User.update(user.id, { 
       reset_token: token,
       reset_token_expires: now
-    })
+    }) 
 
     // send email to user with link the recover password
     await mailer.sendMail({
@@ -47,7 +47,7 @@ module.exports = {
       <p>Click on the link below for  recover your password</p>
 
       <p>
-        <a href="http://localhost:3000/users/ password-reset?token=$=${token}" target="_blank">
+        <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank">
           Recover Password
         </a> 
       </p>
@@ -62,6 +62,26 @@ module.exports = {
       console.log(err)
       return res.render('session/forgot-password', {
         error:'Error unexpected'
+      })
+    }
+  },
+
+  resetForm(req, res) { 
+    return res.render('session/password-reset', { token: req.query.token })
+  },
+
+  reset(req, res) {
+    const { email, password, passwordRepeat, token } = req.body 
+
+    try {
+      
+
+      // Create new hash password
+
+    }catch(err) {
+      console.error(err)
+      return res.render('session/password-reset', {
+        error: 'Error inesperado, tente novamente!'
       })
     }
   }
