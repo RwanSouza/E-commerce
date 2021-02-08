@@ -5,5 +5,5 @@ module.exports = new Pool({
   password:'docker',
   host:'localhost',
   port: 5432,
-  database: 'store3',
+  database: 'store2',
 });
