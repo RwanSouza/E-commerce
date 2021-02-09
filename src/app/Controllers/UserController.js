@@ -1,6 +1,10 @@
-const { rawListeners } = require('../../config/db')
 const User = require('../models/User')
+const Product = require('../models/Product')
+
 const { formatCpfCnpj, formatCep } = require('../lib/utils')
+
+const { hash } = require('bcryptjs')
+const { unlinkSync } = require('fs')
 
 module.exports = {
   registerForm(req, res) {
@@ -8,21 +12,31 @@ module.exports = {
   },
 
   async show(req, res){
-   const { user } = req
+    try {
+      const { user } = req
 
-    user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
-    user.cep = formatCep(user.cep)
-
-    return res.render('user/index', { user })
+      user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
+      user.cep = formatCep(user.cep)
+  
+      return res.render('user/index', { user })
+    }catch(err) {
+      console.error(err)
+    }
   },
 
   async post(req, res) {
     try {
-    const userId = await User.create(req.body)
+      let { name, email, password, cpf_cnpj, cep, addres } = req.body
 
-    req.session.userId = userId
+      password = await hash(password, 8)
+      cpf_cnpj = cpf_cnpj.replace(/\D/g, '')
+      cep = cep.replace(/\D/g, '')
 
-    return res.redirect('/users')
+      const userId = await User.create({ name, email, password, cpf_cnpj, cep, addres })
+
+      req.session.userId = userId
+
+      return res.redirect('/users')
     }catch(err) {
       console.log(err)
     }
@@ -59,8 +73,23 @@ module.exports = {
   async delete(req, res) {
     try {
 
-      await User.delete(req.body.id)
-      req.session.destroy()
+      // catch all products
+      const products = await Product.findAll({ where: { user_id: req.body.id } })
+
+      // catch all images products
+      const allFilesPromise = products.map(product => 
+        Product.files(product.id))
+      
+      let promiseResults = await Promise.all(allFilesPromise)
+      
+      // remove user
+        await User.delete(req.body.id)
+        req.session.destroy()
+
+      // remove the images in folder public
+      promiseResults.map(results => {
+        results.rows.map(file => unlinkSync(file.path))
+      })
 
       return res.render('session/login', {
         success: 'Account delete with success'
