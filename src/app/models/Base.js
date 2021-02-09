@@ -50,7 +50,7 @@ const Base = {
      
       Object.keys(fields).map(key => {
         keys.push(key)
-        keys.push(fields[key])
+        values.push(`'${fields[key]}'`)
       })
 
       const query = `INSERT INTO ${this.table} (${keys.join(',')})
