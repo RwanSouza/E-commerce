@@ -88,7 +88,7 @@ module.exports = {
 
       // remove the images in folder public
       promiseResults.map(results => {
-        results.rows.map(file => unlinkSync(file.path))
+        results.map(file => unlinkSync(file.path))
       })
 
       return res.render('session/login', {

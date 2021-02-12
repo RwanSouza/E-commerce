@@ -4,7 +4,7 @@ const File = require('../models/File');
 const SearchController = require('./SearchController');
  
 const { formatPrice, date} = require('../lib/utils');
-
+const { unlinkSync } = require('fs')
 
 
 module.exports = {
@@ -47,7 +47,7 @@ module.exports = {
           status: status || 1
         })
         
-        const filesPromise = req.files.map(file => File.create({...file, product_id: productId}));
+        const filesPromise = req.files.map(file => File.create({name: file.filename, path: file.path, product_id: productId}));
         await Promise.all(filesPromise);
 
       return res.redirect(`products/${productId}` );
@@ -163,8 +163,13 @@ module.exports = {
   },
   
   async delete(req, res ) {
+
+    
+    const files = await Product.files(req.body.id)
     await Product.delete(req.body.id);
 
+    files.map(file => unlinkSync(file.path))
+    
     return res.redirect('/products/create');
   }
 }
