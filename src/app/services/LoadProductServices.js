@@ -37,7 +37,7 @@ const LoadServices = {
     return this[service]()
   },
 
-  product(){
+  async product(){
     try {
 
       const product = await Product.findOne(this.filter)
@@ -47,7 +47,7 @@ const LoadServices = {
       console.error(err)
     }
   },
-  products(){
+  async products(){
     try {
 
       const products = await Product.findAll(this.filter)
