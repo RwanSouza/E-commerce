@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const Product = require('../models/Product')
 
+const LoadProductService = require('../services/LoadProductServices')
 const { formatCpfCnpj, formatCep } = require('../lib/utils')
 
 const { hash } = require('bcryptjs')
@@ -101,5 +102,12 @@ module.exports = {
         error: 'Error when trying to delete your account'
       })
     }
+  },
+  async ads(req, res) {
+    const products = await LoadProductService.load('products',  {
+      where: { user_id: req.session.userId }
+    })
+
+    return res.render('user/ads', { products }) 
   }
 }
