@@ -22,18 +22,9 @@ module.exports = {
   async post(req, res) {
 
     try {
-      const keys = Object.keys(req.body);
 
-      for(key of keys ) {
-        if(req.body[key] == "") {
-          return res.send('Please, fill all fields')
-        }
-      }
 
-      if(req.files.length == 0) 
-        return res.send('Please, send at least one image');
-
-        let { category_id, name, description, old_price, price, quantity, status } = req.body;
+        let { category_id, name, description, old_price, price, quantity, status } = req.body
         price = price.replace(/\D/g, '');
 
         const productId = await Product.create({
@@ -47,10 +38,10 @@ module.exports = {
           status: status || 1
         })
         
-        const filesPromise = req.files.map(file => File.create({name: file.filename, path: file.path, product_id: productId}));
+        const filesPromise = req.files.map(file => File.create({name: file.filename, path: file.path, product_id: productId}))
         await Promise.all(filesPromise);
 
-      return res.redirect(`products/${productId}` );
+      return res.redirect(`products/${productId}` )
 
     }catch(err) {
       console.error(err)
@@ -119,7 +110,7 @@ module.exports = {
       const removedFilesPromise = removedFiles.map(id => File.delete(id));
 
       await Promise.all(removedFilesPromise);
-    }
+  }
 
     req.body.price = req.body.price.replace(/\D/g, "");
 
