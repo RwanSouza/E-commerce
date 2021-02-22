@@ -67,7 +67,10 @@
         {% elseif product.quantity == 0 %}
           <p class="unavailable">Sold out</p>
         {% else %}
-          <button class="button">Buy</button>
+          <form action="/users/orders" method="POST">
+            <input type="hidden" name="id" value="{{product.id}}">
+            <button class="button">Buy</button>
+          </form>
         {%endif%}
       </div>
     
